@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 //aqui surge la consulta a la API para mostrar los datos
 import { HttpClient } from '@angular/common/http'
 import { User } from '../interfaces/user';
-import { Observable} from 'rxjs';
+import { Observable, map } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,7 +15,7 @@ export class UserService {
   constructor(private http: HttpClient) {
   }
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.BASE_URL}/user}`);
+    return this.http.get<User[]>(`${this.BASE_URL}/user`);
   }
   getUser(id: string): Observable<User> {
     return this.http.get<User>(`${this.BASE_URL}/user/${id}`);
@@ -23,10 +23,10 @@ export class UserService {
   createUser(user: User): Observable<User> {
     return this.http.post<User>(`${this.BASE_URL}/user/create`, user);
   }
-  deleteUser(id: string) {
+  deleteUser(id?: string) {
     return this.http.delete<User>(`${this.BASE_URL}/user/delete/${id}`);
   }
-  updateUser(id: string, user: User) {
+  updateUser(user: User, id?: string) {
     return this.http.put<User>(`${this.BASE_URL}/user/update/${id}`, user);
   }
 
