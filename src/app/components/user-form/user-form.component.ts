@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/interfaces/user';
 import { UserService } from 'src/app/services/user.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+//activatedroute nos da información de la ruta actual
 @Component({
   selector: 'app-user-form',
   templateUrl: './user-form.component.html',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class UserFormComponent implements OnInit {
 
-
+  edit: boolean = false; //para distinguir si debemos crear o actualizar el usuario
 
   user: User = {
     name: '',
@@ -18,12 +19,24 @@ export class UserFormComponent implements OnInit {
     imageURL: ''
   };
   constructor(private userService: UserService,
-    private router: Router)
+    private router: Router,
+    private activatedRoute: ActivatedRoute)
   //router permite navegar entre rutas, ejecuta metodos para ello
   { }
 
   ngOnInit(): void {
-
+    const params = this.activatedRoute.snapshot.params;
+    if (params) {
+      this.userService.getUser(params['id'])
+        .subscribe(
+          res => {
+            console.log(res);
+            this.user = res;
+            //la variable user pasa a ser lo obtenido en la respuesta del backend
+            this.edit = true;//se está editando el usuario
+          }
+        )
+    }
   }
 
   createUser() {
@@ -37,23 +50,17 @@ export class UserFormComponent implements OnInit {
       )
   }
 
-  updateUser() {
+  updateUser(user: User, id?: string) {
+    delete this.user.createdAt;
     this.userService.updateUser(this.user, this.user._id)
       .subscribe(
         (res) => {
           console.log(res);
-          this.router.navigate(['/']);
+          this.router.navigate([`/`]);
         }
-      )
-  }
-
-  deleteUser() {
-    this.userService.deleteUser(this.user._id).subscribe(
-      (res) => {
-        console.log(res);
-        this.router.navigate(['/']);
-      }
-    )
+        //debido al archivo app.routing.module
+        //la navegación renderiza el componente del user-form
+      );
   }
 
 }

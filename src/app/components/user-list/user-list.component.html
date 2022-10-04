@@ -1,15 +1,26 @@
-<div *ngFor="let user of users" class="card card-body mb-2">
-    <div class="row">
-        <div class="col-md-8">
-            <ul>
-                <li>id:{{user._id}}</li>
-                <li>name:{{user.name}}</li>
-                <li>email: {{user.email}}</li>
-                <li>createdAt: {{user.createdAt}}</li>
-            </ul>
-        </div>
-        <div class="col-md-4">
-            <img [src]="user.imageURL" alt="">
-        </div>
-    </div>
-</div>
+<table class="table table-hover table-dark">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">CreatedAt</th>
+            <th scope="col">Img</th>
+            <th scope="col">Options</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let user of users">
+        <tr>
+            <th scope="row">{{user._id}}</th>
+            <td>{{user.name}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.createdAt}}</td>
+            <td><img [src]="user.imageURL" alt="user-image"></td>
+            <td><button class="btn btn-warning m-lg-2" [routerLink]="['user/update',user._id]">Edit</button>
+                <!--Aqui se le pasa el control al componente del formulario mediante el usode routerLink-->
+                <button class="btn btn-danger m-lg-2" (click)="deleteUser(user._id)">Delete</button>
+                <!--Se concatena variables con , -->
+            </td>
+        </tr>
+    </tbody>
+</table>

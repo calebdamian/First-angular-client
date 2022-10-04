@@ -3,7 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service'
 import { User } from 'src/app/interfaces/user';
 import { map } from 'rxjs-compat/operator/map';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { Route, Router } from '@angular/router';
+
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
@@ -13,7 +15,7 @@ export class UserListComponent implements OnInit {
 
   users: User[] = [];
   //se instancia el servicio
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private readonly router: Router) { }
 
 
 
@@ -21,21 +23,35 @@ export class UserListComponent implements OnInit {
     this.getUsers();
 
   }
+
+
   getUsers() {
     this.userService.getUsers()
       .subscribe(
         res => {
+          console.log(typeof (res));
           this.users = res;
           console.log(this.users);
+          console.log(typeof (this.users));
         }
 
-      )
-    /* .subscribe(
-      res => {
-        this.users = res;
-        console.log(this.users);
-      }
-    )*/ //permite visualizar la respuesta
+      );
+  }
 
+
+  //no se establece un objeto USER, si no solo obtenemos el id del usuario del cual se desee efectuar la operación
+  deleteUser(id?: string) {
+    this.userService.deleteUser(id).subscribe(
+      (res) => {
+        console.log(res);
+        this.getUsers();
+      }
+    );
+  }
+
+  confirmDeletion(name: string) {
+    if (confirm("Are you sure to delete User: " + name)) {
+
+    }
   }
 }
