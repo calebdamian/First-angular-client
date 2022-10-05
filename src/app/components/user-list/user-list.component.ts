@@ -49,9 +49,9 @@ export class UserListComponent implements OnInit {
     );
   }
 
-  confirmDeletion(name: string) {
-    if (confirm("Are you sure to delete User: " + name)) {
-
+  clickMethod(name: string, id?: string) {
+    if (confirm("Are you sure to delete " + name)) {
+      this.deleteUser(id);
     }
   }
 }
