@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
     password: ''
   }
 
-  async login(logged_user: ILoggedUser) {
+  login(logged_user: ILoggedUser) {
     this.authService.loginUser(this.user).subscribe(
       (v) => {
         console.log(v),

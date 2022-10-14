@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 //aqui va la lógica del componente
 import { UserService } from '../../services/user.service'
-import { User } from 'src/app/interfaces/user';
-import { map } from 'rxjs-compat/operator/map';
-import { Observable, of } from 'rxjs';
-import { Route, Router } from '@angular/router';
+import { IUser } from 'src/app/interfaces/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-list',
@@ -13,7 +11,7 @@ import { Route, Router } from '@angular/router';
 })
 export class UserListComponent implements OnInit {
 
-  users: User[] = [];
+  users: IUser[] = [];
   //se instancia el servicio
   constructor(private userService: UserService, private readonly router: Router) { }
 
