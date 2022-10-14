@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/interfaces/user';
+import { IUser } from 'src/app/interfaces/user';
 import { UserService } from 'src/app/services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
 //activatedroute nos da información de la ruta actual
@@ -12,8 +12,9 @@ export class UserFormComponent implements OnInit {
 
   edit: boolean = false; //para distinguir si debemos crear o actualizar el usuario
 
-  user: User = {
+  user: IUser = {
     name: '',
+    username: '',
     email: '',
     password: '',
     imageURL: ''
@@ -50,7 +51,7 @@ export class UserFormComponent implements OnInit {
       )
   }
 
-  updateUser(user: User, id?: string) {
+  updateUser(user: IUser, id?: string) {
     delete this.user.createdAt;
     this.userService.updateUser(this.user, this.user._id)
       .subscribe(

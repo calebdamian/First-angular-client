@@ -1,1 +1,12 @@
-<p>login works!</p>
+<div class="login">
+    <form action="" method="post">
+        <h1>Login</h1>
+        <input type="text" placeholder="Enter username here" required="required"  name="username"
+        [(ngModel)]="user.username">
+        
+        <input type="password" placeholder="Enter your password here" required="required" 
+        [(ngModel)]="user.password" name="password" required="required">
+
+        <button type="submit" (click)="login()">Login</button>
+    </form>
+</div>

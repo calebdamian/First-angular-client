@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 //aqui surge la consulta a la API para mostrar los datos
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http'
-import { User } from '../interfaces/user';
+import { IUser } from '../interfaces/user';
 import { Observable, map, catchError, throwError } from 'rxjs';
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ export class UserService {
   // se utilizan las rutas de la API
   // creación de objeto http que permitirá ejecutar operaciones de este tipo
 
-  BASE_URL: string = 'http://127.0.0.1:3000';
+  BASE_URL: string = 'http://127.0.0.1:3000/auth';
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -20,20 +20,20 @@ export class UserService {
 
   constructor(private readonly http: HttpClient) {
   }
-  getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.BASE_URL}/user`, this.httpOptions).pipe(map((results: any) => results.users, catchError(this.handleError)));
+  getUsers(): Observable<IUser[]> {
+    return this.http.get<IUser[]>(`${this.BASE_URL}/user`, this.httpOptions).pipe(map((results: any) => results.users, catchError(this.handleError)));
   }
-  getUser(id: string): Observable<User> {
-    return this.http.get<User>(`${this.BASE_URL}/user/${id}`);
+  getUser(id: string): Observable<IUser> {
+    return this.http.get<IUser>(`${this.BASE_URL}/user/${id}`);
   }
-  createUser(user: User): Observable<User> {
-    return this.http.post<User>(`${this.BASE_URL}/user/create`, user);
+  createUser(user: IUser): Observable<IUser> {
+    return this.http.post<IUser>(`${this.BASE_URL}/user/create`, user);
   }
   deleteUser(id?: string) {
-    return this.http.delete<User>(`${this.BASE_URL}/user/delete/${id}`);
+    return this.http.delete<IUser>(`${this.BASE_URL}/user/delete/${id}`);
   }
-  updateUser(user: User, id?: string) {
-    return this.http.put<User>(`${this.BASE_URL}/user/update/${id}`, user);
+  updateUser(user: IUser, id?: string) {
+    return this.http.put<IUser>(`${this.BASE_URL}/user/update/${id}`, user);
   }
 
   private handleError(error: HttpErrorResponse) {

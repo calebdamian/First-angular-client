@@ -2,24 +2,25 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 //importar el componente a renderizar
 import { UserListComponent } from './components/user-list/user-list.component'
-import { UserFormComponent } from './components/user-form/user-form.component';
+import { UserFormComponent } from './components/register/user-form.component';
+import { LoginComponent } from './components/login/login.component';
 const routes: Routes = [
   //agregar las rutas y componentes correspondientes
-  //TODO: Cambiar rutas por defecto, agregar el login como main y luego enrutar debidamente una vez autenticado el usuario.
+
   {
-    path: '', //seria el path main
+    path: 'login', //seria el path main
+    component: LoginComponent
+  },
+  {
+    path: 'auth/user', //read de los users, delete user
     component: UserListComponent
   },
   {
-    path: 'user', //nuestro main real
-    component: UserListComponent
-  },
-  {
-    path: 'user/create', //formulario de creación
+    path: 'register', //create user
     component: UserFormComponent
   },
   {
-    path: 'user/update/:id',
+    path: 'auth/user/update/:id', //update de los users
     component: UserFormComponent
   }
 
