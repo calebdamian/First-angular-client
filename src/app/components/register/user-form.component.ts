@@ -45,7 +45,7 @@ export class UserFormComponent implements OnInit {
       .subscribe(
         (v) => {
           console.log(v);
-          this.router.navigate(['/']); //navega a la pagina principal
+          this.router.navigate(['/auth/user']); //navega a la pagina principal
         }
 
       )
@@ -57,7 +57,7 @@ export class UserFormComponent implements OnInit {
       .subscribe(
         (res) => {
           console.log(res);
-          this.router.navigate([`/`]);
+          this.router.navigate([`/auth/user`]);
         }
         //debido al archivo app.routing.module
         //la navegación renderiza el componente del user-form

@@ -1,12 +1,14 @@
-<div class="login">
-    <form action="" method="post">
-        <h1>Login</h1>
+<form action="" method="post">
+     <h1>Login</h1>
+    <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
         <input type="text" placeholder="Enter username here" required="required"  name="username"
-        [(ngModel)]="user.username">
-        
-        <input type="password" placeholder="Enter your password here" required="required" 
-        [(ngModel)]="user.password" name="password" required="required">
-
-        <button type="submit" (click)="login()">Login</button>
-    </form>
-</div>
+        [(ngModel)]="user.username" class="form-control">
+    </div>
+       <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" placeholder="Enter your password here" required="required" 
+            [(ngModel)]="user.password" name="password" required="required" class="form-control">
+       </div>   
+    <button class="primary" type="submit" (click)="login(user)">Login</button>
+</form>

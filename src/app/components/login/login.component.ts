@@ -24,7 +24,12 @@ export class LoginComponent implements OnInit {
     password: ''
   }
 
-  async login() {
-
+  async login(logged_user: ILoggedUser) {
+    this.authService.loginUser(this.user).subscribe(
+      (v) => {
+        console.log(v),
+          this.router.navigate(['/auth/user']);
+      }
+    );
   }
 }
