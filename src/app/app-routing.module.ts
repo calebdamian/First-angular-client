@@ -22,7 +22,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'register', //create user
+    path: 'auth/user/create', //create user
     component: UserFormComponent,
     canActivate: [AuthGuard]
   },

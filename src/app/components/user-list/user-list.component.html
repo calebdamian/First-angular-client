@@ -17,7 +17,7 @@
             <td>{{user.email}}</td>
             <td>{{user.createdAt}}</td>
             <td><img [src]="user.imageURL" alt="user-image"></td>
-            <td><button class="btn btn-warning m-lg-2" [routerLink]="['auth/user/update',user._id]">Edit</button>
+            <td><button class="btn btn-warning m-lg-2" [routerLink]="['/auth/user/update',user._id]">Edit</button>
                 <!--Aqui se le pasa el control al componente del formulario mediante el usode routerLink-->
                 <button class="btn btn-danger m-lg-2" (click)="clickMethod(user.name, user._id)">Delete</button>
                 <!--Se concatena variables con , -->
