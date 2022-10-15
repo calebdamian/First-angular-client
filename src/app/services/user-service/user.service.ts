@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 //aqui surge la consulta a la API para mostrar los datos
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http'
-import { IUser } from '../interfaces/user';
+import { IUser } from '../../interfaces/user';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators'
 import { throwError } from 'rxjs';
 import { map } from 'rxjs/operators'
+import { JWT_NAME } from '../auth-service/auth.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -16,7 +17,7 @@ export class UserService {
   BASE_URL: string = 'http://127.0.0.1:3000/auth';
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     })
   };
 
@@ -27,7 +28,7 @@ export class UserService {
     return this.http.get<IUser[]>(`${this.BASE_URL}/user`, this.httpOptions).pipe(map((results: any) => results.users, catchError(this.handleError)));
   }
   getUser(id: string): Observable<IUser> {
-    return this.http.get<IUser>(`${this.BASE_URL}/user/${id}`);
+    return this.http.get<IUser>(`${this.BASE_URL}/user/${id}`, this.httpOptions);
   }
   createUser(user: IUser): Observable<IUser> {
     return this.http.post<IUser>(`${this.BASE_URL}/user/create`, user);

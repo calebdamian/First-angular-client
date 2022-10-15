@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IUser } from 'src/app/interfaces/user';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from '../../services/user-service/user.service'
 import { Router, ActivatedRoute } from '@angular/router';
 //activatedroute nos da información de la ruta actual
 @Component({
@@ -45,7 +45,7 @@ export class UserFormComponent implements OnInit {
       .subscribe(
         (v) => {
           console.log(v);
-          this.router.navigate(['/auth/user']); //navega a la pagina principal
+          this.router.navigate(['/auth/user']); //navega a la lista de usuarios
         }
 
       )

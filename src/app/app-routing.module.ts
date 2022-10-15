@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { UserListComponent } from './components/user-list/user-list.component'
 import { UserFormComponent } from './components/register/user-form.component';
 import { LoginComponent } from './components/login/login.component';
+import { AuthGuard } from './guards/auth.guard';
 const routes: Routes = [
   //agregar las rutas y componentes correspondientes
 
@@ -17,15 +18,18 @@ const routes: Routes = [
   },
   {
     path: 'auth/user', //read de los users, delete user
-    component: UserListComponent
+    component: UserListComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'register', //create user
-    component: UserFormComponent
+    component: UserFormComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'auth/user/update/:id', //update de los users
-    component: UserFormComponent
+    component: UserFormComponent,
+    canActivate: [AuthGuard]
   }
 
 ];

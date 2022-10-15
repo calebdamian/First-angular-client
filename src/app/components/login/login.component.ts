@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
+import { map } from 'rxjs/internal/operators/map';
+import { AuthService } from 'src/app/services/auth-service/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -22,11 +23,12 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.authService.loginUser(this.user.username, this.user.password).subscribe(
-      (v) => {
-        console.log(v);
-        this.router.navigate(['/auth/user']);
+    this.authService.login(this.user).pipe(
+      map(token => this.router.navigate(['/auth/user']))
+    ).subscribe(
+      (res) => {
+        console.log(res);
       }
-    );
+    )
   }
 }

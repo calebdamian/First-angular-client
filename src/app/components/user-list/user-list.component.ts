@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 //aqui va la lógica del componente
-import { UserService } from '../../services/user.service'
+import { UserService } from '../../services/user-service/user.service'
 import { IUser } from 'src/app/interfaces/user';
 import { Router } from '@angular/router';
 
@@ -13,24 +13,17 @@ export class UserListComponent implements OnInit {
 
   users: IUser[] = [];
   //se instancia el servicio
-  constructor(private userService: UserService, private readonly router: Router) { }
-
-
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
     this.getUsers();
-
   }
-
-
   getUsers() {
     this.userService.getUsers()
       .subscribe(
         res => {
-          console.log(typeof (res));
           this.users = res;
-          console.log(this.users);
-          console.log(typeof (this.users));
+          console.log(res);
         }
 
       );
