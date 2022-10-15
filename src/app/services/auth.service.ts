@@ -17,8 +17,8 @@ export class AuthService {
     })
   };
 
-  loginUser(loggedInUser: ILoggedUser): Observable<any> {
-    return this.http.post(`${this.BASE_URL}/login`, loggedInUser);
+  loginUser(username: string, password: string): Observable<any> {
+    return this.http.post(`${this.BASE_URL}/login`, { username, password });
   }
 
 }

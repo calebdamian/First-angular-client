@@ -8,7 +8,11 @@ const routes: Routes = [
   //agregar las rutas y componentes correspondientes
 
   {
-    path: 'login', //seria el path main
+    path: '', //seria el path main
+    component: LoginComponent
+  },
+  {
+    path: 'auth/login', //seria el path main
     component: LoginComponent
   },
   {

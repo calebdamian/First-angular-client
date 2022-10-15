@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ILoggedUser } from 'src/app/interfaces/logged_user';
 import { AuthService } from 'src/app/services/auth.service';
-
-
 
 @Component({
   selector: 'app-login',
@@ -19,16 +16,16 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  user: ILoggedUser = {
+  user: any = {
     username: '',
     password: ''
   }
 
-  login(logged_user: ILoggedUser) {
-    this.authService.loginUser(this.user).subscribe(
+  login() {
+    this.authService.loginUser(this.user.username, this.user.password).subscribe(
       (v) => {
-        console.log(v),
-          this.router.navigate(['/auth/user']);
+        console.log(v);
+        this.router.navigate(['/auth/user']);
       }
     );
   }
