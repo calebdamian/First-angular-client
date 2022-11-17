@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 //importar el componente a renderizar
-import { UserListComponent } from './components/user-list/user-list.component'
+import { UserListComponent } from './components/user-list/user-list.component';
 import { UserFormComponent } from './components/register/user-form.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './guards/auth.guard';
@@ -10,32 +10,30 @@ const routes: Routes = [
 
   {
     path: '', //seria el path main
-    component: LoginComponent
+    component: UserFormComponent,
   },
   {
-    path: 'auth/login', //seria el path main
-    component: LoginComponent
+    path: 'login', //seria el path main
+    component: LoginComponent,
   },
   {
-    path: 'auth/user', //read de los users, delete user
+    path: 'users', //read de los users, delete user
     component: UserListComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
-    path: 'auth/user/create', //create user
+    path: 'user/signup', //create user
     component: UserFormComponent,
-    canActivate: [AuthGuard]
   },
   {
-    path: 'auth/user/update/:id', //update de los users
+    path: 'user/update/:id', //update de los users
     component: UserFormComponent,
-    canActivate: [AuthGuard]
-  }
-
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

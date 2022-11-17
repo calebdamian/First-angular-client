@@ -1,27 +1,34 @@
 <app-navbar></app-navbar>
 <table class="table table-hover table-dark">
-    <thead>
-        <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">CreatedAt</th>
-            <th scope="col">Img</th>
-            <th scope="col">Options</th>
-        </tr>
-    </thead>
-    <tbody *ngFor="let user of users">
-        <tr>
-            <th scope="row">{{user._id}}</th>
-            <td>{{user.name}}</td>
-            <td>{{user.email}}</td>
-            <td>{{user.createdAt}}</td>
-            <td><img [src]="user.imageURL" alt="user-image"></td>
-            <td><button class="btn btn-warning m-lg-2" [routerLink]="['/auth/user/update',user._id]">Edit</button>
-                <!--Aqui se le pasa el control al componente del formulario mediante el usode routerLink-->
-                <button class="btn btn-danger m-lg-2" (click)="clickMethod(user.name, user._id)">Delete</button>
-                <!--Se concatena variables con , -->
-            </td>
-        </tr>
-    </tbody>
+  <thead>
+    <tr>
+      <th scope="col">Nombre completo</th>
+      <th scope="col">Nombre de usuario</th>
+      <th scope="col">Email</th>
+      <th scope="col">Options</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let user of users">
+    <tr>
+      <th scope="row">{{ user.userProfile.full_name }}</th>
+      <td>{{ user.username }}</td>
+      <td>{{ user.userProfile.email }}</td>
+      <td>
+        <button
+          class="btn btn-warning m-lg-2"
+          [routerLink]="['/user/update', user.id]"
+        >
+          Edit
+        </button>
+        <!--Aqui se le pasa el control al componente del formulario mediante el usode routerLink-->
+        <button
+          class="btn btn-danger m-lg-2"
+          (click)="clickMethod(user.username, user.id)"
+        >
+          Delete
+        </button>
+        <!--Se concatena variables con , -->
+      </td>
+    </tr>
+  </tbody>
 </table>
